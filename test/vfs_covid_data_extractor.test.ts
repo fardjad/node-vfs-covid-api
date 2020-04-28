@@ -8,6 +8,7 @@ import VFSCovidDataExtractor from '../src/vfs/vfs_covid_data_extractor';
 import VFSScriptFetcher from '../src/vfs/vfs_script_fetcher';
 import AcornESTreeParser from '../src/estree/acorn_estree_parser';
 import AstringESTreeCodeGenerator from '../src/estree/astring_estree_code_generator';
+import {dynamicPool} from '../src/config/thread_pool';
 
 export const lab = script();
 const {describe, it, before} = lab;
@@ -27,8 +28,8 @@ describe('A VFS Data Extractor', () => {
 
   before(() => {
     const mockVFSScriptFetcher = new MockVFSScriptFetcher();
-    const esTreeParser = new AcornESTreeParser();
-    const esTreeCodeGenerator = new AstringESTreeCodeGenerator();
+    const esTreeParser = new AcornESTreeParser(dynamicPool);
+    const esTreeCodeGenerator = new AstringESTreeCodeGenerator(dynamicPool);
     vfsCovidDataExtractor = new VFSCovidDataExtractor(
       mockVFSScriptFetcher,
       esTreeParser,

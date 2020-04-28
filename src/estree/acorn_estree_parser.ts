@@ -1,10 +1,16 @@
-import {ESTreeParser} from './estree_parser';
-import {dynamicPool} from '../config/thread_pool';
 import {Node} from 'estree';
+import {DynamicPool} from 'node-worker-threads-pool';
+import {ESTreeParser} from './estree_parser';
 
 export default class AcornESTreeParser implements ESTreeParser {
-  parse(code: string) {
-    return dynamicPool.exec({
+  private dynamicPool: DynamicPool;
+
+  public constructor(dynamicPool: DynamicPool) {
+    this.dynamicPool = dynamicPool;
+  }
+
+  public parse(code: string) {
+    return this.dynamicPool.exec({
       task() {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const acorn = require('acorn');

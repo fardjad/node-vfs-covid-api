@@ -1,11 +1,11 @@
-import VFSScriptFetcher from './vfs_script_fetcher';
-
+import type {VFSConfig} from '../config/vfs_config';
+import type VFSScriptFetcher from './vfs_script_fetcher';
 import got from 'got';
 
 export default class VFSScriptFetcherImpl implements VFSScriptFetcher {
   private vfsScriptUrl: string;
 
-  public constructor({VFS_SCRIPT_URL}: {VFS_SCRIPT_URL: string}) {
+  public constructor({VFS_SCRIPT_URL}: VFSConfig) {
     this.vfsScriptUrl = VFS_SCRIPT_URL;
   }
 

@@ -1,6 +1,6 @@
 import {script} from '@hapi/lab';
 import {expect} from '@hapi/code';
-import memoize from '../src/cache/expiring_niladic_function_memoizer';
+import ExpiringNiladicFunctionMemoizer from '../src/cache/expiring_niladic_function_memoizer';
 
 export const lab = script();
 const {describe, it, beforeEach} = lab;
@@ -23,7 +23,11 @@ describe('A Niladic Function Memoizer', () => {
 
   beforeEach(() => {
     value = 0;
-    memoizedFunction = memoize(getTick)(1)(increment);
+    const expiringNiladicFunctionMemoizer = new ExpiringNiladicFunctionMemoizer(
+      1,
+      getTick
+    );
+    memoizedFunction = expiringNiladicFunctionMemoizer.memoize(increment);
   });
 
   it('Should cache the function return value until it expires', async () => {

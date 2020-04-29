@@ -26,4 +26,5 @@ const memoize = (getTicks = process.hrtime.bigint) => (
   };
 };
 
+export type MemoizeFn = typeof memoize;
 export default memoize;

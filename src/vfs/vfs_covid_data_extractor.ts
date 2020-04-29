@@ -1,19 +1,17 @@
 import {Script} from 'vm';
-
-import {
+import VFSDataExtractionException from './exception/vfs_data_extraction_exception';
+import type {
   Node,
   Property,
   ArrayExpression,
   ExpressionStatement,
   Identifier,
 } from 'estree';
-import {ESTreeParser} from '../estree/estree_parser';
-import {ESTreeWalker} from '../estree/estree_walker';
-import {ESTreeCodeGenerator} from '../estree/estree_code_generator';
-
-import VFSDataExtractionException from './exception/vfs_data_extraction_exception';
-import VFSScriptFetcher from './vfs_script_fetcher';
-import SourceCountry from './data/source_country';
+import type {ESTreeParser} from '../estree/estree_parser';
+import type {ESTreeWalker} from '../estree/estree_walker';
+import type {ESTreeCodeGenerator} from '../estree/estree_code_generator';
+import type VFSScriptFetcher from './vfs_script_fetcher';
+import type SourceCountry from './data/source_country';
 
 export default class VfsCovidDataExtractor {
   private vfsScriptFetcher: VFSScriptFetcher;

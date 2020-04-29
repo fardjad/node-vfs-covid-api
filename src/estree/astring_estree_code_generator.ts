@@ -1,6 +1,6 @@
-import {Node} from 'estree';
-import {DynamicPool} from 'node-worker-threads-pool';
-import {ESTreeCodeGenerator} from './estree_code_generator';
+import type {Node} from 'estree';
+import type {DynamicPool} from 'node-worker-threads-pool';
+import type {ESTreeCodeGenerator} from './estree_code_generator';
 
 export default class AstringESTreeCodeGenerator implements ESTreeCodeGenerator {
   private dynamicPool: DynamicPool;

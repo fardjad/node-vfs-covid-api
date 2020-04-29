@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 type AnyFn = (...args: any[]) => any;
+
 const memoize = (getTicks = process.hrtime.bigint) => (
   lifeTimeInSeconds: number
 ) => <Fn extends AnyFn>(fn: Fn) => {

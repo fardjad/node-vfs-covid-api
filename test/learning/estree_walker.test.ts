@@ -1,7 +1,7 @@
-import * as esTreeWalker from 'estree-walker';
 import {script} from '@hapi/lab';
 import {expect} from '@hapi/code';
-import {VariableDeclaration, BaseNode} from 'estree';
+import * as esTreeWalker from 'estree-walker';
+import type {VariableDeclaration, BaseNode} from 'estree';
 
 export const lab = script();
 const {test} = lab;

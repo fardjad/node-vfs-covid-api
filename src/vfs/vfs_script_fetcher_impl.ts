@@ -1,6 +1,6 @@
+import got from 'got';
 import type {VFSConfig} from '../config/vfs_config';
 import type VFSScriptFetcher from './vfs_script_fetcher';
-import got from 'got';
 
 export default class VFSScriptFetcherImpl implements VFSScriptFetcher {
   private vfsScriptUrl: string;

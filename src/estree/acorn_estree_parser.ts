@@ -1,6 +1,6 @@
-import {Node} from 'estree';
-import {DynamicPool} from 'node-worker-threads-pool';
-import {ESTreeParser} from './estree_parser';
+import type {Node} from 'estree';
+import type {DynamicPool} from 'node-worker-threads-pool';
+import type {ESTreeParser} from './estree_parser';
 
 export default class AcornESTreeParser implements ESTreeParser {
   private dynamicPool: DynamicPool;

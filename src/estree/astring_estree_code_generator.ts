@@ -1,13 +1,11 @@
+import {injectable} from 'tsyringe';
+import {DynamicPool} from 'node-worker-threads-pool';
+import ESTreeCodeGenerator from './estree_code_generator';
 import type {Node} from 'estree';
-import type {DynamicPool} from 'node-worker-threads-pool';
-import type {ESTreeCodeGenerator} from './estree_code_generator';
 
+@injectable()
 export default class AstringESTreeCodeGenerator implements ESTreeCodeGenerator {
-  private dynamicPool: DynamicPool;
-
-  public constructor(dynamicPool: DynamicPool) {
-    this.dynamicPool = dynamicPool;
-  }
+  public constructor(private dynamicPool: DynamicPool) {}
 
   public generate(node: Node) {
     return this.dynamicPool.exec({

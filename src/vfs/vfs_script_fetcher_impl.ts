@@ -1,15 +1,13 @@
 import got from 'got';
-import type {VFSConfig} from '../config/vfs_config';
-import type VFSScriptFetcher from './vfs_script_fetcher';
+import {inject, injectable} from 'tsyringe';
+import {VFSConfig} from '../config/vfs_config';
+import VFSScriptFetcher from './vfs_script_fetcher';
 
+@injectable()
 export default class VFSScriptFetcherImpl implements VFSScriptFetcher {
-  private vfsScriptUrl: string;
-
-  public constructor({VFS_SCRIPT_URL}: VFSConfig) {
-    this.vfsScriptUrl = VFS_SCRIPT_URL;
-  }
+  public constructor(@inject('VFSConfig') private vfsConfig: VFSConfig) {}
 
   public fetchScript() {
-    return got.get(this.vfsScriptUrl).text();
+    return got.get(this.vfsConfig.VFS_SCRIPT_URL).text();
   }
 }

@@ -1,5 +1,5 @@
 import type {Node} from 'estree';
 
-export interface ESTreeParser {
+export default interface ESTreeParser {
   parse(source: string): Promise<Node>;
 }

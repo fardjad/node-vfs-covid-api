@@ -1,13 +1,11 @@
+import {injectable} from 'tsyringe';
+import {DynamicPool} from 'node-worker-threads-pool';
+import ESTreeParser from './estree_parser';
 import type {Node} from 'estree';
-import type {DynamicPool} from 'node-worker-threads-pool';
-import type {ESTreeParser} from './estree_parser';
 
+@injectable()
 export default class AcornESTreeParser implements ESTreeParser {
-  private dynamicPool: DynamicPool;
-
-  public constructor(dynamicPool: DynamicPool) {
-    this.dynamicPool = dynamicPool;
-  }
+  public constructor(private dynamicPool: DynamicPool) {}
 
   public parse(code: string) {
     return this.dynamicPool.exec({

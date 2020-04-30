@@ -1,5 +1,10 @@
 import {Script} from 'vm';
+import {scoped, Lifecycle, inject} from 'tsyringe';
 import VFSDataExtractionException from './exception/vfs_data_extraction_exception';
+import ESTreeParser from '../estree/estree_parser';
+import ESTreeWalker from '../estree/estree_walker';
+import ESTreeCodeGenerator from '../estree/estree_code_generator';
+import VFSScriptFetcher from './vfs_script_fetcher';
 import type {
   Node,
   Property,
@@ -7,32 +12,17 @@ import type {
   ExpressionStatement,
   Identifier,
 } from 'estree';
-import type {ESTreeParser} from '../estree/estree_parser';
-import type {ESTreeWalker} from '../estree/estree_walker';
-import type {ESTreeCodeGenerator} from '../estree/estree_code_generator';
-import type VFSScriptFetcher from './vfs_script_fetcher';
 import type SourceCountry from './data/source_country';
 
+@scoped(Lifecycle.ContainerScoped)
 export default class VfsCovidDataExtractor {
-  private vfsScriptFetcher: VFSScriptFetcher;
-
-  private esTreeParser: ESTreeParser;
-
-  private esTreeWalker: ESTreeWalker;
-
-  private esTreeCodeGenerator: ESTreeCodeGenerator;
-
   constructor(
-    vfsScriptFetcher: VFSScriptFetcher,
-    esTreeParser: ESTreeParser,
-    esTreeWalker: ESTreeWalker,
-    esTreeCodeGenerator: ESTreeCodeGenerator
-  ) {
-    this.vfsScriptFetcher = vfsScriptFetcher;
-    this.esTreeParser = esTreeParser;
-    this.esTreeWalker = esTreeWalker;
-    this.esTreeCodeGenerator = esTreeCodeGenerator;
-  }
+    @inject('VFSScriptFetcher') private vfsScriptFetcher: VFSScriptFetcher,
+    @inject('ESTreeParser') private esTreeParser: ESTreeParser,
+    @inject('ESTreeWalker') private esTreeWalker: ESTreeWalker,
+    @inject('ESTreeCodeGenerator')
+    private esTreeCodeGenerator: ESTreeCodeGenerator
+  ) {}
 
   public async extractVfsCovidData(): Promise<SourceCountry[]> {
     const vfsScript = await this.vfsScriptFetcher.fetchScript();

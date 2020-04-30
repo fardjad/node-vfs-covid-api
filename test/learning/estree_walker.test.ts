@@ -33,7 +33,7 @@ test('Async Lookup', async () => {
         foundNode = node;
       }
 
-      return new Promise(resolve => process.nextTick(resolve));
+      return new Promise(resolve => setImmediate(resolve));
     },
   });
 

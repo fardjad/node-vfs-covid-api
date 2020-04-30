@@ -1,43 +1,39 @@
-import * as path from 'path';
-import {promises as fs} from 'fs';
+import 'reflect-metadata';
 import {script} from '@hapi/lab';
 import {expect} from '@hapi/code';
 import * as esTreeWalker from 'estree-walker';
 import {DynamicPool} from 'node-worker-threads-pool';
+import {container} from 'tsyringe';
 import VFSCovidDataExtractor from '../src/vfs/vfs_covid_data_extractor';
-import VFSScriptFetcher from '../src/vfs/vfs_script_fetcher';
 import AcornESTreeParser from '../src/estree/acorn_estree_parser';
 import AstringESTreeCodeGenerator from '../src/estree/astring_estree_code_generator';
-import threadPoolConfig from '../src/config/thread_pool_config';
+import {makeDynamicPool} from '../src/dynamic_pool';
+import {MockVFSScriptFetcher} from './support/mock_vfs_script_fetcher';
 
 export const lab = script();
 const {describe, it, before} = lab;
-
-class MockVFSScriptFetcher implements VFSScriptFetcher {
-  public async fetchScript() {
-    return fs
-      .readFile(path.join(__dirname, './fixtures/vfs_script.min.notjs'), {
-        encoding: 'utf-8',
-      })
-      .then(body => body as string);
-  }
-}
 
 describe('A VFS Data Extractor', () => {
   let vfsCovidDataExtractor: VFSCovidDataExtractor;
 
   before(() => {
-    const mockVFSScriptFetcher = new MockVFSScriptFetcher();
-    const dynamicPool = new DynamicPool(threadPoolConfig.WORKER_THREADS_COUNT);
-    const esTreeParser = new AcornESTreeParser(dynamicPool);
-    const esTreeCodeGenerator = new AstringESTreeCodeGenerator(dynamicPool);
-    vfsCovidDataExtractor = new VFSCovidDataExtractor(
-      mockVFSScriptFetcher,
-      esTreeParser,
-      esTreeWalker,
-      esTreeCodeGenerator
-    );
+    initContainer();
+    vfsCovidDataExtractor = container.resolve(VFSCovidDataExtractor);
   });
+
+  const initContainer = () => {
+    container.reset();
+    container.register('ThreadPoolConfig', {
+      useValue: {WORKER_THREADS_COUNT: 1},
+    });
+    container.register(DynamicPool, {useFactory: makeDynamicPool});
+    container.register('ESTreeParser', {useClass: AcornESTreeParser});
+    container.register('ESTreeWalker', {useValue: esTreeWalker});
+    container.register('ESTreeCodeGenerator', {
+      useClass: AstringESTreeCodeGenerator,
+    });
+    container.register('VFSScriptFetcher', {useClass: MockVFSScriptFetcher});
+  };
 
   it('Should return VFS covid data', async () => {
     const covidData = await vfsCovidDataExtractor.extractVfsCovidData();

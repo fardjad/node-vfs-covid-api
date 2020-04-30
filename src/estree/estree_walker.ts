@@ -1,6 +1,6 @@
 import type {BaseNode} from 'estree';
 
-export interface ESTreeWalker {
+export default interface ESTreeWalker {
   asyncWalk(
     ast: BaseNode,
     walker: {

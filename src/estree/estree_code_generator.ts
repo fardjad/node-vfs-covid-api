@@ -1,5 +1,5 @@
 import type {Node} from 'estree';
 
-export interface ESTreeCodeGenerator {
+export default interface ESTreeCodeGenerator {
   generate(node: Node): Promise<string>;
 }

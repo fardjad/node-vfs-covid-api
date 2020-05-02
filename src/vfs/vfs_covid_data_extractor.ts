@@ -58,7 +58,7 @@ export default class VfsCovidDataExtractor {
   }
 
   private async arrayExpressionToJsArray<T>(
-    arrayExpresson: ArrayExpression
+    arrayExpression: ArrayExpression
   ): Promise<T[]> {
     const ast: ExpressionStatement = {
       type: 'ExpressionStatement',
@@ -69,7 +69,7 @@ export default class VfsCovidDataExtractor {
           type: 'Identifier',
           name: 'arr',
         },
-        right: arrayExpresson,
+        right: arrayExpression,
       },
     };
 

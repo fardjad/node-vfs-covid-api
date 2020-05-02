@@ -4,7 +4,11 @@
     "rootDir": ".",
     "outDir": "build",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "inlineSources": true,
+    "inlineSourceMap": true,
+    "sourceMap": false,
+    "declaration": false
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }

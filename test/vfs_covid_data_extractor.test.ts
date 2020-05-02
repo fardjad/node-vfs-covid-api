@@ -8,7 +8,7 @@ import VFSCovidDataExtractor from '../src/vfs/vfs_covid_data_extractor';
 import AcornESTreeParser from '../src/estree/acorn_estree_parser';
 import AstringESTreeCodeGenerator from '../src/estree/astring_estree_code_generator';
 import {makeDynamicPool} from '../src/dynamic_pool';
-import {MockVFSScriptFetcher} from './support/mock_vfs_script_fetcher';
+import {FileVFSScriptFetcher} from './support/file_vfs_script_fetcher';
 
 export const lab = script();
 const {describe, it, before} = lab;
@@ -32,7 +32,7 @@ describe('A VFS Data Extractor', () => {
     container.register('ESTreeCodeGenerator', {
       useClass: AstringESTreeCodeGenerator,
     });
-    container.register('VFSScriptFetcher', {useClass: MockVFSScriptFetcher});
+    container.register('VFSScriptFetcher', {useClass: FileVFSScriptFetcher});
   };
 
   it('Should return VFS covid data', async () => {

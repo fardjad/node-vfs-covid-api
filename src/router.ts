@@ -12,16 +12,51 @@ export const makeRouter = (container: DependencyContainer): ServerRoute[] => {
     {
       method: 'GET',
       path: '/vfs-application-centers',
-      handler: vfsApplicationCentersController.getApplicationCenters.bind(
-        vfsApplicationCentersController
-      ),
       options: {
+        handler: vfsApplicationCentersController.getApplicationCenters.bind(
+          vfsApplicationCentersController
+        ),
+        description: 'Get Visa Application Centers',
+        tags: ['api'],
         validate: {
           query: Joi.object({
-            from: Joi.string().optional(),
-            to: Joi.string().optional(),
-            toast_message: Joi.string().optional(),
+            from: Joi.string()
+              .optional()
+              .description("The country you're applying from"),
+            to: Joi.string()
+              .optional()
+              .description("The country you're going to visit"),
+            toast_message: Joi.string()
+              .optional()
+              .description(
+                "Can be used for filtering the results based on visa application centers' statuses"
+              ),
           }),
+        },
+        response: {
+          schema: Joi.array()
+            .required()
+            .items(
+              Joi.object({
+                name: Joi.string().required(),
+                visiting: Joi.array()
+                  .required()
+                  .items(
+                    Joi.object({
+                      name: Joi.string().required(),
+                      contact_url: Joi.string().optional(),
+                      url: Joi.string().optional(),
+                      toast_message: Joi.string()
+                        .optional()
+                        .description('Visa application center status'),
+                    })
+                      .unknown(true)
+                      .label('DestinationCountry')
+                  )
+                  .label('DestinationCountries'),
+              }).label('SourceCountry')
+            )
+            .label('VisaApplicationCenters'),
         },
       },
     },

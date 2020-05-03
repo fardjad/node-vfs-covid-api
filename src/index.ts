@@ -5,7 +5,7 @@ import {Server} from './server';
 
 const init = async () => {
   initContainer(container);
-  const server = container.resolve<Server>('Server');
+  const server = await container.resolve<Server>('Server');
   await server.start();
   console.log('Server is listening on %s', server.info.uri);
 };

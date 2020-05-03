@@ -8,7 +8,8 @@
     "inlineSources": true,
     "inlineSourceMap": true,
     "sourceMap": false,
-    "declaration": false
+    "declaration": false,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }

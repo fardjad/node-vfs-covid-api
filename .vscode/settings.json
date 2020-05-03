@@ -1,14 +1,16 @@
 {
-    "cSpell.words": [
-        "Astring",
-        "Covid",
-        "Lifecycle",
-        "Memoized",
-        "Memoizer",
-        "Niladic",
-        "bigint",
-        "estree",
-        "posttest",
-        "tsyringe"
-    ]
+  "cSpell.words": [
+    "Astring",
+    "CPUs",
+    "Covid",
+    "Lifecycle",
+    "Memoized",
+    "Memoizer",
+    "Niladic",
+    "bigint",
+    "estree",
+    "posttest",
+    "prestart",
+    "tsyringe"
+  ]
 }

@@ -147,8 +147,8 @@ describe('visa-application-centers route', () => {
     return testContainer;
   };
 
-  const startServer = () => {
-    server = testContainer.resolve('Server');
+  const startServer = async () => {
+    server = await testContainer.resolve('Server');
     return server.start();
   };
 

@@ -23,8 +23,6 @@ export const makeServer = async (container: DependencyContainer) => {
     },
   });
 
-  server.route(router);
-
   await server.register([
     {
       plugin: Inert,
@@ -35,8 +33,8 @@ export const makeServer = async (container: DependencyContainer) => {
     {
       plugin: HapiSwagger,
       options: {
-        templates: path.join(__dirname, '../public/templates'),
-        documentationPath: '/',
+        templates: path.join(__dirname, './swagger/templates'),
+        documentationPath: '/api',
         info: {
           title: pkg.name,
           description: pkg.description,
@@ -45,6 +43,8 @@ export const makeServer = async (container: DependencyContainer) => {
       },
     },
   ]);
+
+  server.route(router);
 
   return server;
 };

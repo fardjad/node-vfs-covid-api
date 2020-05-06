@@ -8,18 +8,21 @@ As far as I know, VFS Global does not provide a public API to check/filter the [
 
 This simple application fetches the [JS file that is imported on the "COVID-19: CUSTOMER ADVISORIES" page](https://www.vfsglobal.com/en/assets/js/script.min.js), parses it, extracts the data, and exposes it via a RESTful API.
 
-
 ## What can I do with this?
 
 Given you have an inquiry about VFS Global visa application centers, it can answer questions such as:
 
-1. I'm currently residing in **Albania** can I get a visa to visit **Canada**? ([`/vfs-application-centers?from=albania&to=canada`](https://vfs-covid-api.now.sh/vfs-application-centers?from=albania&to=canada))
+1. I'm currently residing in **Albania** can I get a visa to visit **Canada**? ([`/api/vfs-application-centers?from=albania&to=canada`](https://vfs-covid-api.now.sh/api/vfs-application-centers?from=albania&to=canada))
 
-2. From which countries can I get a visa to visit **Australia**? ([`/vfs-application-centers?to=australia`](https://vfs-covid-api.now.sh/vfs-application-centers?to=australia))
+2. From which countries can I get a visa to visit **Australia**? ([`/api/vfs-application-centers?to=australia`](https://vfs-covid-api.now.sh/api/vfs-application-centers?to=australia))
 
-3. Which visa application centers are currently **Open** and can process my application to visit **Germany**. ([`/vfs-application-centers?to=germany&toast_message=open`](https://vfs-covid-api.now.sh/vfs-application-centers?to=germany&toast_message=open))
+3. Which visa application centers are currently **Open** and can process my application to visit **Germany**. ([`/vfs-application-centers?to=germany&toast_message=open`](https://vfs-covid-api.now.sh/api/vfs-application-centers?to=germany&toast_message=open))
 
-For more info, have a look the API [documentation](https://vfs-covid-api.now.sh/).
+For more info, have a look the API [documentation](https://vfs-covid-api.now.sh/api).
+
+## Web Front-end
+
+A web frontend is available at ([`/`](https://vfs-covid-api.now.sh/))
 
 ## Running the server
 

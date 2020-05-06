@@ -1,3 +1,4 @@
+import * as path from 'path';
 import {ServerRoute} from '@hapi/hapi';
 import * as Joi from '@hapi/joi';
 import VFSVisaApplicationCenterController from './controller/vfs_visa_application_centers_controller';
@@ -11,7 +12,7 @@ export const makeRouter = (container: DependencyContainer): ServerRoute[] => {
   return [
     {
       method: 'GET',
-      path: '/vfs-application-centers',
+      path: '/api/vfs-application-centers',
       options: {
         handler: vfsApplicationCentersController.getApplicationCenters.bind(
           vfsApplicationCentersController
@@ -57,6 +58,16 @@ export const makeRouter = (container: DependencyContainer): ServerRoute[] => {
               }).label('SourceCountry')
             )
             .label('VisaApplicationCenters'),
+        },
+      },
+    },
+    {
+      method: 'GET',
+      path: '/{param*}',
+      handler: {
+        directory: {
+          path: path.join(__dirname, '../public'),
+          index: ['index.html'],
         },
       },
     },

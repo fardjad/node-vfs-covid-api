@@ -112,7 +112,7 @@ describe('visa-application-centers route', () => {
   const whenIGetAllApplicationCenters = () => {
     return server.inject({
       method: 'GET',
-      url: '/vfs-application-centers',
+      url: '/api/vfs-application-centers',
     });
   };
 
@@ -122,7 +122,7 @@ describe('visa-application-centers route', () => {
   ) => {
     return server.inject({
       method: 'GET',
-      url: `/vfs-application-centers?from=${from}&to=${to}`,
+      url: `/api/vfs-application-centers?from=${from}&to=${to}`,
     });
   };
 
@@ -131,7 +131,7 @@ describe('visa-application-centers route', () => {
   ) => {
     return server.inject({
       method: 'GET',
-      url: `/vfs-application-centers?toast_message=${toastMessage}`,
+      url: `/api/vfs-application-centers?toast_message=${toastMessage}`,
     });
   };
 

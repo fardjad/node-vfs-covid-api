@@ -1,11 +1,22 @@
 <template>
-  <b-table :data="data" :columns="columns"></b-table>
+  <div>
+    <vue-good-table
+      v-if="!loading"
+      :columns="columns"
+      :rows="rows"
+      :pagination-options="paginationOptions"
+    ></vue-good-table>
+    <div v-else>Loading...</div>
+  </div>
 </template>
 
 <script>
 module.exports = {
   data() {
     return {
+      paginationOptions: {
+        enabled: true,
+      },
       columns: [
         {
           field: 'from',
@@ -23,8 +34,11 @@ module.exports = {
     };
   },
   computed: {
-    data() {
+    rows() {
       return store.state.data;
+    },
+    loading() {
+      return store.state.loading;
     },
   },
 };

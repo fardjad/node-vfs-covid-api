@@ -5,6 +5,7 @@ const state = {
   to: undefined,
   toast_message: undefined,
   data: [],
+  loading: false,
 };
 
 const mutations = {
@@ -32,6 +33,9 @@ const mutations = {
   setToastMessage(state, value) {
     this.state.toastMessage = value;
   },
+  setLoading(state, value) {
+    this.state.loading = value;
+  },
 };
 
 const actions = {
@@ -50,7 +54,9 @@ const actions = {
       }
       url.searchParams.append(key, params[key]);
     });
+    commit('setLoading', true);
     const sourceCountries = await (await fetch(url)).json();
+    commit('setLoading', false);
     commit('setData', sourceCountries);
   },
 };

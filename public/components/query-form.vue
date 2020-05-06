@@ -1,17 +1,11 @@
 <template>
   <section>
-    <b-field label="I want to apply from">
-      <b-input
-        @input="setFrom"
-        placeholder="Name of the country you want to apply from. Leave empty to include all countries"
-      ></b-input>
+    <b-field label="I want to apply from (leave empty to include all countries)">
+      <b-input @input="setFrom" placeholder="ex. Canada"></b-input>
     </b-field>
 
-    <b-field label="I want to visit">
-      <b-input
-        @input="setTo"
-        placeholder="Name of the country you're going to visit. Leave empty to include all countries"
-      ></b-input>
+    <b-field label="I want to visit (leave empty to include all countries)">
+      <b-input @input="setTo" placeholder="ex. The Netherlands"></b-input>
     </b-field>
 
     <b-field label="Only show the visa application centers with the following status">

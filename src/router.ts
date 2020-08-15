@@ -1,6 +1,6 @@
 import * as path from 'path';
 import {ServerRoute} from '@hapi/hapi';
-import * as Joi from '@hapi/joi';
+import * as Joi from 'joi';
 import VFSVisaApplicationCenterController from './controller/vfs_visa_application_centers_controller';
 import type {DependencyContainer} from 'tsyringe';
 

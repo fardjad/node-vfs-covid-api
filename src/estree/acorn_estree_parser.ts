@@ -12,7 +12,9 @@ export default class AcornESTreeParser implements ESTreeParser {
       task() {
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const acorn = require('acorn');
-        return acorn.parse(this.workerData.code);
+        return acorn.parse(this.workerData.code, {
+          ecmaVersion: 2020,
+        });
       },
       workerData: {code},
     }) as Promise<Node>;

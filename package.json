@@ -32,7 +32,7 @@
     "acorn": "^8.0.1",
     "astring": "^1.4.3",
     "estree-walker": "^2.0.1",
-    "got": "^11.5.2",
+    "got": "^11.8.5",
     "hapi-swagger": "^14.0.0",
     "joi": "^17.2.0",
     "node-worker-threads-pool": "^1.4.1",
